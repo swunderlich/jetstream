@@ -1,5 +1,5 @@
 import {Subjects} from '../subjects';
-import {Msg, NatsConnection, StringCodec} from 'nats';
+import {consumerOpts, Msg, NatsConnection, StringCodec, SubscriptionOptions} from 'nats';
 
 interface Event {
   subject: Subjects;
@@ -14,16 +14,15 @@ export abstract class Listener<T extends Event> {
     this.client = client;
   }
 
-  listen () {
+  async listen () {
     const sc = StringCodec();
-    const subscription = this.client.subscribe(this.subject);
-    (async () => {
+    const opts: SubscriptionOptions = {
+
+    }
+    const subscription = this.client.subscribe(this.subject, opts);
       for await (const m of subscription) {
         this.onMessage(JSON.parse(sc.decode(m.data)), m);
       }
       console.log("subscription closed");
-    })();
-
-
   }
 }
