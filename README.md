@@ -1,3 +1,6 @@
+Install modules in listener and publisher directories
+Run skaffold dev in root directory 
+
 Additional setup for example to work
 
 ```
