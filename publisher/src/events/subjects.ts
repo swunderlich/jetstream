@@ -1,3 +1,3 @@
 export enum Subjects {
-  TestMessage= 'test:message'
+  TestMessage= 'test.message'
 }

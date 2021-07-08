@@ -5,8 +5,8 @@ import {app} from './app';
 const start = async () => {
 
     try {
-        await natsWrapper.connect()
-        const publisher = new TestPublisher(natsWrapper.client)
+        await natsWrapper.connect();
+        const publisher = new TestPublisher(natsWrapper.client);
         setInterval(() => {
             publisher.publish({
                 text: 'test from test publisher'

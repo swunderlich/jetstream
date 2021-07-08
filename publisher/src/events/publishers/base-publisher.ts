@@ -1,4 +1,4 @@
-import {NatsConnection, StringCodec} from 'nats'
+import {JetStreamClient, StringCodec} from 'nats'
 import {Subjects} from '../subjects';
 
 
@@ -9,9 +9,9 @@ interface Event {
 
 export abstract class Publisher<T extends Event> {
   abstract subject: T['subject'];
-  protected client: NatsConnection;
+  protected client: JetStreamClient;
 
-  constructor(client: NatsConnection) {
+  constructor(client: JetStreamClient) {
     this.client = client;
   };
 

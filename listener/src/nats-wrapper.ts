@@ -1,7 +1,7 @@
-import {connect, NatsConnection} from 'nats';
+import {connect, JetStreamClient, NatsConnection} from 'nats';
 
 class NatsWrapper {
-  private _client?: NatsConnection; // ? means that it can be undefined sometimes
+  private _client?: JetStreamClient; // ? means that it can be undefined sometimes
 
   get client () {
     if (!this._client) {
@@ -11,8 +11,9 @@ class NatsWrapper {
   }
 
   async connect (): Promise<void> {
-    this._client = await connect({servers: 'nats-srv:4222'});
-    console.log('Connected to NATS');
+    const connection: NatsConnection = await connect({servers: 'nats-srv:4222'});
+    this._client = connection.jetstream();
+    console.log('Connected to NATS JetStream');
   }
 }
 
