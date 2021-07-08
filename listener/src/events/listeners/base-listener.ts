@@ -1,5 +1,5 @@
 import {Subjects} from '../subjects';
-import {consumerOpts, Msg, NatsConnection, StringCodec, SubscriptionOptions} from 'nats';
+import { Msg, NatsConnection, StringCodec, SubscriptionOptions} from 'nats';
 
 interface Event {
   subject: Subjects;
@@ -17,7 +17,7 @@ export abstract class Listener<T extends Event> {
   async listen () {
     const sc = StringCodec();
     const opts: SubscriptionOptions = {
-
+      // todo figure out durable, ack and so on
     }
     const subscription = this.client.subscribe(this.subject, opts);
       for await (const m of subscription) {
