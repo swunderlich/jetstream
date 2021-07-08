@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-publisher-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-publisher
+  template:
+    metadata:
+      labels:
+        app: test-publisher
+    spec:
+      containers:
+        - name: test-publisher
+          image: swunderlich/publisher

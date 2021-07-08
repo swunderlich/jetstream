@@ -1,0 +1,28 @@
+apiVersion: skaffold/v2beta12
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*
+build:
+  local:
+    push: false
+  #googleCloudBuild:
+   # projectId: ticketing-dev-307914
+  artifacts:
+    - image: swunderlich/publisher
+      context: publisher
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: swunderlich/listener
+      context: listener
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
