@@ -6,7 +6,6 @@ Additional setup for example to work
 ```
 kubectl apply -f https://raw.githubusercontent.com/nats-io/nack/main/deploy/rbac.yml
 kubectl apply -f https://raw.githubusercontent.com/nats-io/nack/main/deploy/crds.yml
-kubectl apply -f https://raw.githubusercontent.com/nats-io/nack/main/deploy/deployment.yml
 ```
 
 See https://github.com/nats-io/nack#jetstream-controller for additional setup
