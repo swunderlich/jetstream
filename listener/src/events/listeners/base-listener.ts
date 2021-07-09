@@ -1,6 +1,7 @@
 import {Subjects} from '../subjects';
 import {
-  consumerOpts, createInbox,
+  ConsumerOpts,
+  consumerOpts, ConsumerOptsBuilder, createInbox,
   JetStreamClient, JsMsg,
   StringCodec,
 } from 'nats';
@@ -20,7 +21,8 @@ export abstract class Listener<T extends Event> {
 
   async listen () {
     const sc = StringCodec();
-    const opts = consumerOpts();
+    const opts: ConsumerOptsBuilder = consumerOpts();
+    opts.queue('test-queue')
     opts.durable("test");
     opts.manualAck();
     opts.ackExplicit();
